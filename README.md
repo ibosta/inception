@@ -45,7 +45,7 @@ inception/
     └── requirements/
         ├── mariadb/     Dockerfile, conf/50-server.cnf, tools/entrypoint.sh
         ├── wordpress/   Dockerfile, conf/www.conf, tools/entrypoint.sh
-        └── nginx/       Dockerfile, conf/nginx.conf
+        └── nginx/       Dockerfile, conf/nginx.conf, tools/entrypoint.sh
 ```
 
 - `Dockerfile`: how the image of the service is built.
@@ -66,7 +66,7 @@ inception/
   starts after that.
 - **Passwords:** stored as Docker secrets in `secrets/`. Other settings are in `srcs/.env`.
   Both are ignored by git.
-- **TLS certificate:** self-signed, created when the NGINX image is built.
+- **TLS certificate:** self-signed, created by the NGINX entrypoint on the first start of the container.
 
 ### Virtual Machines vs Docker
 
@@ -161,4 +161,12 @@ More details: [USER_DOC.md](USER_DOC.md) for users, [DEV_DOC.md](DEV_DOC.md) for
 
 ### Use of AI
 
-writing readme.md using ai and translate english.
+
+- **Documentation:** help to write and translate `README.md`, `USER_DOC.md` and `DEV_DOC.md` into English.
+- **Review:** review of the entrypoint scripts and the Makefile (for example, which
+  `FLUSH PRIVILEGES` is needed in the MariaDB bootstrap, idempotent WordPress setup,
+  checks for missing secrets).
+- **Explanations:** clarifying concepts such as Docker secrets, PID 1 and `exec`,
+  named volumes vs bind mounts.
+
+Every suggestion was read, tested in the virtual machine and understood before being kept.
