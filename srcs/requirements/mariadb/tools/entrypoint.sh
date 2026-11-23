@@ -11,7 +11,6 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$(cat /run/secrets/db_root_password
 CREATE DATABASE $MYSQL_DATABASE;
 CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$(cat /run/secrets/db_password)';
 GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';
-FLUSH PRIVILEGES;
 SQL
 fi
 
